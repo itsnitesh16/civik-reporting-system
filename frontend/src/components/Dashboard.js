@@ -14,7 +14,7 @@ const Dashboard = () => {
   const [uploading, setUploading] = useState(false);
 
 
-  const API = "https://civik-reporting-system-5vaq.vercel.app/";
+  const API = "https://civik-reporting-system-5vaq.vercel.app";
   const token = localStorage.getItem("token");
 
   useEffect(() => {

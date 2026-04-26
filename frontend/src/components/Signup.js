@@ -9,7 +9,7 @@ const Signup = () => {
   const [address, setaddress] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const API = "https://civik-reporting-system-5vaq.vercel.app/";
+  const API = "https://civik-reporting-system-5vaq.vercel.app";
 
   const handleSubmit = async (event) => {
     event.preventDefault();
