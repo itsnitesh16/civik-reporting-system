@@ -11,7 +11,7 @@ const StaffSignup = () => {
   const [departmentId, setdeptid] = useState("");
   const [role, setrole] = useState("");
   const navigate = useNavigate();
-  const API = "http://localhost:5000";
+  const API = "https://civik-reporting-system-5vaq.vercel.app/";
 
   const handleSubmit = async (event) => {
     event.preventDefault();
