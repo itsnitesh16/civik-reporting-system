@@ -7,7 +7,7 @@ dotenv.config();
 const app = express();
 const Routes = require('./routes/user');
 app.use(cors({
-  origin: ['http://localhost:3000'],
+  origin: ['http://localhost:3000', "https://civik-reporting-system.vercel.app"],
   credentials: true
 }));
 app.use(express.json());
