@@ -4,15 +4,15 @@ import './Signup.css';
 import axios from "axios";
 
 const Signup = () => {
-      const [name, setName] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [address, setaddress] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const API = "http://localhost:5000";
 
-  const handleSubmit= async(event)=>{
-   event.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
     try {
       const res = await axios.post(
@@ -30,17 +30,17 @@ const Signup = () => {
     }
   }
 
-  function navigation(){
+  function navigation() {
     navigate('/staff/signup');
   }
-  function navigationtologin(){
-        navigate('/login');
+  function navigationtologin() {
+    navigate('/login');
 
   }
-  
+
   return (
     <div className="signup-container">
- <h2>Signup</h2>
+      <h2>Signup</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <input
@@ -53,16 +53,16 @@ const Signup = () => {
         </div>
 
         <div className="form-group">
-        <input
-  type="email"
-  id="email"
-  value={email}
-  onChange={(e) => setEmail(e.target.value)}
-  placeholder="Enter your email"
-  required
-  pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-  title="Please enter a valid email address"
-/>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter your email"
+            required
+            pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+            title="Please enter a valid email address"
+          />
 
         </div>
 
@@ -90,8 +90,8 @@ const Signup = () => {
 
         <button type="submit" id="btn2" > Submit</button>
       </form>
-              <button type="button" className="btn1" onClick={navigation}>Signup as a Service Provider</button>
-                <button type="button" className="btn1" onClick={navigationtologin}>login </button>
+      <button type="button" className="btn1" onClick={navigation}>Signup as a Service Provider</button>
+      <button type="button" className="btn1" onClick={navigationtologin}>login </button>
 
 
     </div>

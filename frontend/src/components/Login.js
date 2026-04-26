@@ -8,8 +8,8 @@ const Login = () => {
   const navigate = useNavigate();
   const API = "http://localhost:5000";
 
-  const handleSubmit= async(event)=>{
-   event.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
     try {
       const res = await axios.post(
@@ -19,8 +19,8 @@ const Login = () => {
       );
 
       console.log(res.data);
-        let token = res.data.token;
-       localStorage.setItem("token", token); // store in localStorage
+      let token = res.data.token;
+      localStorage.setItem("token", token); // store in localStorage
 
       alert("Login Successful !");
       navigate('/Dashboard');
@@ -31,23 +31,23 @@ const Login = () => {
   }
 
 
-  
+
   return (
     <div className="Login-container">
- <h2>Login</h2>
+      <h2>Login</h2>
       <form onSubmit={handleSubmit}>
 
         <div className="form-group">
-        <input
-  type="email"
-  id="email"
-  value={email}
-  onChange={(e) => setEmail(e.target.value)}
-  placeholder="Enter your email"
-  required
+          <input
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter your email"
+            required
 
-  title="Please enter a valid email address"
-/>
+            title="Please enter a valid email address"
+          />
 
         </div>
 
@@ -62,7 +62,7 @@ const Login = () => {
           />
         </div>
 
-       
+
 
         <button type="submit" id="btn2" > Submit</button>
       </form>

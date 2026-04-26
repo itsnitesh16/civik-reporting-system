@@ -7,100 +7,101 @@ const Dashboard = () => {
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [image,setimage]= useState("");
-  const[location,setlocation]=useState("");
+  const [image, setimage] = useState("");
+  const [location, setlocation] = useState("");
   const [departmentId, setSelectedDept] = useState("");
-    const[department,setdepartment]=useState([]);
-    const [uploading, setUploading] = useState(false);
+  const [department, setdepartment] = useState([]);
+  const [uploading, setUploading] = useState(false);
 
-  
+
   const API = "http://localhost:5000";
-const token = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
 
-useEffect(() => {
-  axios.get(`${API}/reports`, {
-    headers: {
-      Authorization: `Bearer ${token}`
-    },
-    withCredentials: true
-  })
-  .then(res => {
-   console.log(res);
-    setReports(res.data);
-  }
-)
-
-  .catch(err => console.error(err));
-}, []);
-
-const getalldepartments =async () => {
-  try{
-  const response = await axios.get(
-    `${API}/departments`,{
+  useEffect(() => {
+    axios.get(`${API}/reports`, {
       headers: {
-      Authorization: `Bearer ${token}`
-    },
-    withCredentials: true
+        Authorization: `Bearer ${token}`
+      },
+      withCredentials: true
+    })
+      .then(res => {
+        console.log(res);
+        setReports(res.data);
+      }
+      )
+
+      .catch(err => console.error(err));
+  }, []);
+
+  const getalldepartments = async () => {
+    try {
+      const response = await axios.get(
+        `${API}/departments`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+        withCredentials: true
+      }
+      );
+      console.log(response);
+      setdepartment(response.data);
     }
-  );
-  console.log(response);
-  setdepartment(response.data);
-}
-catch(error){
-  console.log(error);
-}}
+    catch (error) {
+      console.log(error);
+    }
+  }
 
-useEffect(()=>{
-getalldepartments();
-},[]);
+  useEffect(() => {
+    getalldepartments();
+  }, []);
 
 
-const handleinput = async (event) => {
-  const file = event.target.files[0];
-  if (!file) return;
+  const handleinput = async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
 
-  setUploading(true);
+    setUploading(true);
 
-  const data = new FormData();
-  data.append("file", file);
-  data.append("upload_preset", "civik-reporting-system");
-  data.append("cloud_name", "dbihbtvyz");
+    const data = new FormData();
+    data.append("file", file);
+    data.append("upload_preset", "civik-reporting-system");
+    data.append("cloud_name", "dbihbtvyz");
 
-  const res = await fetch("https://api.cloudinary.com/v1_1/dbihbtvyz/image/upload", {
-    method: "POST",
-    body: data
-  });
+    const res = await fetch("https://api.cloudinary.com/v1_1/dbihbtvyz/image/upload", {
+      method: "POST",
+      body: data
+    });
 
-  const uploaded = await res.json();
-  setimage(uploaded.secure_url); // ✅ Save URL properly
-  setUploading(false); // Upload finished
-};
+    const uploaded = await res.json();
+    setimage(uploaded.secure_url); // ✅ Save URL properly
+    setUploading(false); // Upload finished
+  };
 
 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-      if(uploading) {
-    alert("Image is still uploading, wait a second!");
-    return;
-  }
-      if (!image) {
-    alert("Please upload an image before submitting!");
-    return;
-  }
+    if (uploading) {
+      alert("Image is still uploading, wait a second!");
+      return;
+    }
+    if (!image) {
+      alert("Please upload an image before submitting!");
+      return;
+    }
     try {
       const res = await axios.post(
         `${API}/reportissue`,
-        { title, description,image,location,departmentId},
-{
-      headers: {
-      Authorization: `Bearer ${token}`
-    },
-        withCredentials: true 
-    }
-  );
+        { title, description, image, location, departmentId },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          },
+          withCredentials: true
+        }
+      );
 
-      setReports(prev => [res.data.report, ...prev]); 
+      setReports(prev => [res.data.report, ...prev]);
       setTitle("");
       setDescription("");
       setlocation("");
@@ -151,26 +152,26 @@ const handleinput = async (event) => {
             onChange={(e) => setDescription(e.target.value)}
             required
           />
-            <input
+          <input
             placeholder="location"
             value={location}
             onChange={(e) => setlocation(e.target.value)}
             required
           />
           <select
-  value={departmentId} onChange={(e) => setSelectedDept(e.target.value)}>
-  <option value="">-- Choose Department --</option>
-  {department.map((dept) => (
-    <option key={dept._id} value={dept._id}>
-      {dept.name}
-    </option>
-  ))}
-</select>
+            value={departmentId} onChange={(e) => setSelectedDept(e.target.value)}>
+            <option value="">-- Choose Department --</option>
+            {department.map((dept) => (
+              <option key={dept._id} value={dept._id}>
+                {dept.name}
+              </option>
+            ))}
+          </select>
 
 
-            <input type="file" id="fileUpload" name="file" onChange={handleinput} />
+          <input type="file" id="fileUpload" name="file" onChange={handleinput} />
 
-          
+
           <button type="submit">Submit</button>
         </form>
       </div>
