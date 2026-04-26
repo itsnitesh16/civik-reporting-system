@@ -31,7 +31,7 @@ const Dashboard = () => {
       )
 
       .catch(err => console.error(err));
-  }, []);
+  });
 
   const getalldepartments = async () => {
     try {
@@ -53,7 +53,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     getalldepartments();
-  }, []);
+  });
 
 
   const handleinput = async (event) => {
