@@ -114,7 +114,7 @@ const StaffSignup = () => {
 
         </div>
 
-        <button type="submit" id="btn2" > Submit</button>
+        <button type="submit" id="btn2" onClick={handleSubmit}> Submit</button>
       </form>
       <button type="button" className="btn1" onClick={navigationtologin}>login </button>
 
