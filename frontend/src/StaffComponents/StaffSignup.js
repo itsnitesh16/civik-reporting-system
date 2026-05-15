@@ -47,7 +47,7 @@ const StaffSignup = () => {
 
 
   function navigationtologin() {
-    navigate('/staff/login');
+    navigate('/login');
 
   }
 
